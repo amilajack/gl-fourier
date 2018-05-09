@@ -1,5 +1,5 @@
-var test = require('tst');
-var createFormant = require('audio-formant');
+import test from 'tst';
+import createFormant from 'audio-formant';
 
 var N = 2048;
 var waveform = new Float32Array(N);
@@ -17,7 +17,8 @@ var formant = createFormant({
 formant.populate(waveform);
 
 var max = 10e2;
-var run = require('./idle')(N);
+import runFactory from './idle';
+const run = runFactory(N);
 test('Idle run', function () {
 	for (var i = 0; i < max; i++) {
 		run();
@@ -25,7 +26,8 @@ test('Idle run', function () {
 })
 
 
-var dft = require('./dft')(N, waveform);
+import dftFactory from './dft';
+const dft = dftFactory(N, waveform);
 test.skip('Fragment dft', function () {
 	// for (var i = 0; i < max; i++) {
 		dft();
@@ -33,7 +35,8 @@ test.skip('Fragment dft', function () {
 });
 
 
-var sft = require('./sft')(N, waveform);
+import sftFactory from './sft';
+const sft = sftFactory(N, waveform);
 test.only('Stochastic FT', function () {
 	// for (var i = 0; i < max; i++) {
 		sft();
@@ -42,14 +45,16 @@ test.only('Stochastic FT', function () {
 
 test('Vertex dft');
 
-var fftnd = require('./fft-ndarray')(N, waveform);
+import fftndFactory from './fft-ndarray';
+const fftnd = fftndFactory(N, waveform);
 test('Ndarray fft', function () {
 	for (var i = 0; i < max; i++) {
 		fftnd();
 	}
 });
 
-var fft = require('./fft')(N, waveform);
+import fftFactory from './fft';
+const fft = fftFactory(N, waveform);
 test.skip('fft', function () {
 	//to 10 times slower than ndarray-fft
 	for (var i = 0; i < max; i++) {

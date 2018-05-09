@@ -1,10 +1,12 @@
 /**
  * Webgl idle run
  */
-var regl = require('regl')();
+import reglFactory from 'regl';
+
+const regl = reglFactory();
 
 
-module.exports = function (N) {
+export default function (N) {
 	return regl({
 		vert: `
 		precision highp float;
@@ -28,4 +30,4 @@ module.exports = function (N) {
 
 		count: 3
 	});
-};
+}

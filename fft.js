@@ -1,6 +1,6 @@
-var FFT = require('fft');
+import FFT from 'fft';
 
-module.exports = function (N,data) {
+export default function (N,data) {
 	var fft = new FFT.complex(N, false);
 
 	var out = new Float32Array(data.length);
@@ -8,4 +8,4 @@ module.exports = function (N,data) {
 	return function () {
 		fft.simple(out, data);
 	}
-};
+}

@@ -1,10 +1,12 @@
 /**
  * DFT in webgl
  */
-var regl = require('regl')();
+import reglFactory from 'regl';
+
+const regl = reglFactory();
 
 
-module.exports = function (N, data) {
+export default function (N, data) {
 	var text = regl.texture({
 		width: N,
 		height: 1,
@@ -88,4 +90,4 @@ module.exports = function (N, data) {
 
 		count: 3
 	});
-};
+}
